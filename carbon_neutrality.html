@@ -93,20 +93,30 @@
 
     <section id="dashboard" class="pt-6">
       <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-wrap items-center justify-between gap-4">
           <h2 class="text-xl font-semibold">AQI & Emissions Dashboard</h2>
-          <div class="text-sm text-gray-500">Real-time indicators & trends</div>
+          <div class="flex items-center gap-2">
+            <input id="aqi-city-input" type="text" placeholder="Enter city name" class="px-3 py-1.5 border rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-green-500 outline-none text-sm">
+            <button id="aqi-search" class="bg-green-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-green-700 disabled:bg-gray-400">Search</button>
+          </div>
         </div>
 
         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div id="aqi-card" class="p-4 rounded-lg bg-white dark:bg-gray-900 border shadow-sm">
-            <div class="text-xs text-gray-400">AQI (City)</div>
-            <div class="mt-2 flex items-end gap-3">
-              <div id="aqi-value-container" class="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-white text-3xl font-bold">...</div>
-              <div>
-                <div id="aqi-city" class="font-semibold">Loading...</div>
-                <div id="aqi-timestamp" class="text-xs text-gray-500">...</div>
-                <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">Dominant: <span id="aqi-dominant">...</span></div>
+          <div id="aqi-card" class="p-4 rounded-lg bg-white dark:bg-gray-900 border shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="text-xs text-gray-400">AQI (Air Quality Index)</div>
+              <div class="mt-2 flex items-center gap-4">
+                <div id="aqi-value-container" class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">...</div>
+                <div class="flex-grow">
+                  <div id="aqi-city" class="font-semibold text-lg">Loading...</div>
+                  <div id="aqi-timestamp" class="text-xs text-gray-500">...</div>
+                  <div class="mt-1 text-sm text-gray-600 dark:text-gray-300">Dominant: <span id="aqi-dominant" class="font-semibold">...</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button id="show-pollutants" class="text-sm text-green-600 hover:underline">Details</button>
+              <div id="pollutant-details" class="mt-3 hidden">
               </div>
             </div>
           </div>
@@ -291,6 +301,14 @@
   <footer class="text-center py-8 text-sm text-gray-500">
     © 2025 Carbon Neutrality · Built by Divyam Narwal & team · <a href="#" class="text-green-600">GitHub</a>
   </footer>
+
+  <!-- Loading overlay for AQI updates -->
+  <div id="aqi-loading-overlay" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-3">
+      <div class="animate-spin rounded-full h-6 w-6 border-4 border-green-500 border-t-transparent"></div>
+      <span class="text-sm font-medium">Updating AQI data...</span>
+    </div>
+  </div>
 
 <script src="app.js"></script>
 </body>
